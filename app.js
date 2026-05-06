@@ -3,7 +3,9 @@ function injectMainContent(fragmentHtml, includeBackButton) {
     document.getElementById('app-content').innerHTML = fragmentHtml;
     return;
   }
-  fetch('apps/_backbutton.html')
+  // GitHub Pages/Jekyll sering mengecualikan file yang diawali underscore (_...),
+  // sehingga fetch akan balik ke halaman 404.
+  fetch('apps/backbutton.html')
     .then(function (res) {
       return res.text();
     })
