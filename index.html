@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tablet Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- STATUS / CLOCK -->
+<div class="status-bar">
+  <span id="clock">00:00</span>
+</div>
+
+<!-- SEARCH -->
+<div class="search-bar">
+  <input type="text" placeholder="Search..." />
+</div>
+
+<!-- APP GRID -->
+<div class="app-grid">
+  <div class="app" onclick="openApp('apps/about.html')">
+    <div class="icon">👤</div>
+    <span>About Me</span>
+  </div>
+
+  <div class="app" onclick="openApp('apps/projects.html')">
+    <div class="icon">📁</div>
+    <span>Projects</span>
+  </div>
+
+  <div class="app" onclick="openApp('apps/skills.html')">
+    <div class="icon">⚙️</div>
+    <span>Skills</span>
+  </div>
+
+  <div class="app" onclick="openApp('apps/contact.html')">
+    <div class="icon">✉️</div>
+    <span>Contact</span>
+  </div>
+
+  <div class="app" onclick="openApp('apps/journey.html')">
+    <div class="icon">🛤️</div>
+    <span>Journey</span>
+  </div>
+</div>
+
+<!-- Tampilan aplikasi, default hidden -->
+<div class="app-viewer" id="app-viewer" style="display:none;">
+  <div id="app-content"></div>
+</div>
+
+
+<script src="app.js"></script>
+</body>
+</html>
