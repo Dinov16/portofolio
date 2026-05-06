@@ -3,15 +3,8 @@ function injectMainContent(fragmentHtml, includeBackButton) {
     document.getElementById('app-content').innerHTML = fragmentHtml;
     return;
   }
-  // GitHub Pages/Jekyll sering mengecualikan file yang diawali underscore (_...),
-  // sehingga fetch akan balik ke halaman 404.
-  fetch('apps/backbutton.html')
-    .then(function (res) {
-      return res.text();
-    })
-    .then(function (btn) {
-      document.getElementById('app-content').innerHTML = btn + fragmentHtml;
-    });
+  var backButtonHtml = '<button class="close-btn" onclick="closeApp()">Back</button>';
+  document.getElementById('app-content').innerHTML = backButtonHtml + fragmentHtml;
 }
 
 function openApp(appUrl) {
@@ -21,10 +14,18 @@ function openApp(appUrl) {
   grid.style.display = 'none';
   fetch(appUrl)
     .then(function (res) {
+      if (!res.ok) {
+        throw new Error('Gagal memuat: ' + appUrl + ' (' + res.status + ')');
+      }
       return res.text();
     })
     .then(function (html) {
       injectMainContent(html);
+    })
+    .catch(function () {
+      injectMainContent(
+        '<section><h2>Konten tidak ditemukan</h2><p>Halaman menu gagal dimuat. Coba refresh halaman.</p></section>'
+      );
     });
   viewer.onclick = function (e) {
     if (e.target === viewer) {
@@ -158,10 +159,18 @@ var PROJECT_PORTFOLIO = [
 function reloadProjectsApp() {
   fetch('apps/projects.html')
     .then(function (res) {
+      if (!res.ok) {
+        throw new Error('Gagal memuat daftar proyek (' + res.status + ')');
+      }
       return res.text();
     })
     .then(function (html) {
       injectMainContent(html);
+    })
+    .catch(function () {
+      injectMainContent(
+        '<section><h2>Konten tidak ditemukan</h2><p>Daftar proyek gagal dimuat. Coba refresh halaman.</p></section>'
+      );
     });
 }
 
